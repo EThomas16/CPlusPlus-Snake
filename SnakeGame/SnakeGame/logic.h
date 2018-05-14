@@ -9,5 +9,7 @@ public:
 	void initPosition();
 	void newPosition();
 	void seedRandom();
-	std::vector<int> getRandom();
+
+	std::vector<int> getRandomCoords();
+	int boardHeight, boardWidth;
 };

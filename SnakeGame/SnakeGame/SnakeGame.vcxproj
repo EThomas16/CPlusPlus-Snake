@@ -146,6 +146,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="draw_snake.h" />
+    <ClInclude Include="logic.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="draw_snake.cpp" />
+    <ClCompile Include="logic.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
