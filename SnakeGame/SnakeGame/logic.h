@@ -6,10 +6,26 @@ and direction of the snake*/
 
 class Logic {
 public:
-	void initPosition();
-	void newPosition();
-	void seedRandom();
-
+	std::vector<int> initPosition();
+	std::vector<int> updatePosition(int snakeX, int snakeY, int direction);
+	void foodCheck(int snakeX, int snakeY, int foodX, int foodY);
+	void updateTail();
 	std::vector<int> getRandomCoords();
-	int boardHeight, boardWidth;
+	void seedRandom();
+	int inputHandler();
+
+	const int height = 20;
+	const int width = 40;
+	//defined as -1 to prevent movement before a key has been pressed
+	int direction = -1;
+	int tailLength = 0;
+	int snakeX, snakeY;
+	int foodX, foodY;
+
+	struct snakeTail {
+		std::vector<int> tailX;
+		std::vector<int> tailY;
+	};
+
+	Logic::snakeTail _snakeTail;
 };
