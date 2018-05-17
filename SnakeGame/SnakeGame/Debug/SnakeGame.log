@@ -1,3 +1,7 @@
 ﻿  main.cpp
+  logic.cpp
+f:\documents\programming\c++\snakegame\snakegame\logic.cpp(106): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  draw_snake.cpp
+  Generating Code...
   SnakeGame.vcxproj -> F:\Documents\Programming\C++\SnakeGame\Debug\SnakeGame.exe
   SnakeGame.vcxproj -> F:\Documents\Programming\C++\SnakeGame\Debug\SnakeGame.pdb (Full PDB)

@@ -5,7 +5,7 @@
 
 class Draw {
 public:
-	int drawBoard(int snakeX, int snakeY, int foodX, int foodY, std::vector<int> tailX, std::vector<int> tailY, int tailLength);
+	int drawBoard(int snakeX, int snakeY, int foodX, int foodY, int tailX[100], int tailY[100], int tailLength);
 
 	const int height = 20;
 	const int width = 40;
@@ -18,8 +18,14 @@ public:
 	struct snake {
 		int xCoord;
 		int yCoord;
-		char shape = 'x';
+		char headShape = 'X';
+		char bodyShape = 'x';
 	};
 
 	Draw::snake _snake;
+
+private:
+	//these are private methods as they are only used internally in the class
+	int drawTail(int snakeX, int snakeY, int i, int j, int tailX[100], int tailY[100], int tailLength);
+	void debugPrint(int snakeX, int snakeY, int tailX[100], int tailY[100], int tailLength);
 };

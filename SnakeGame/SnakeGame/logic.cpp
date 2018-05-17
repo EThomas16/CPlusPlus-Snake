@@ -5,11 +5,7 @@
 #include <vector>
 #include <conio.h>
 
-/*TODO: return values from logic to pass into draw in main.cpp
-		handle increase of score
-		increase length of snake*/
 std::vector<int> Logic::initPosition() {
-	//TODO: check if required if being drawn already (might be for calculation purposes)
 	std::vector<int> foodCoords;
 	std::vector<int> snakeCoords;
 	std::vector<int> allCoords;
@@ -18,12 +14,14 @@ std::vector<int> Logic::initPosition() {
 	foodX = foodCoords[0];
 	foodY = foodCoords[1];
 
-	snakeCoords = getRandomCoords();
+	//use if random initial coords for snake wanted
+	/*snakeCoords = getRandomCoords();
 	snakeX = snakeCoords[0];
-	snakeY = snakeCoords[1];
+	snakeY = snakeCoords[1];*/
 
-	allCoords.push_back(snakeX);
-	allCoords.push_back(snakeY);
+	//set coordinates to prevent issues with randomly spawning in walls
+	allCoords.push_back(10);
+	allCoords.push_back(10);
 	allCoords.push_back(foodX);
 	allCoords.push_back(foodY);
 
@@ -54,27 +52,21 @@ std::vector<int> Logic::updatePosition (int snakeX, int snakeY, int direction) {
 	return snakeCoords;
 }
 
-void Logic::foodCheck(int snakeX, int snakeY, int foodX, int foodY) {
+std::vector<int> Logic::foodCheck(int snakeX, int snakeY, int foodX, int foodY) {
+	//checks if the food has been 'eaten' by the snake based on the coordinates of each
+	std::vector<int> foodCoords;
 	if (snakeX == foodX && snakeY == foodY) {
+		//increases tail length for each food eaten
 		tailLength++;
+		//and gets a new random position for the food
+		foodCoords = getRandomCoords();
 	}
-}
-
-void Logic::updateTail() {
-	int prevX = _snakeTail.tailX[0];
-	int prevY = _snakeTail.tailY[0];
-	
-	_snakeTail.tailX[0] = snakeX;
-	_snakeTail.tailY[0] = snakeY;
-
-	for (int i = 0; i < tailLength; i++) {
-		int _prevX = _snakeTail.tailX[i];
-		int _prevY = _snakeTail.tailY[i];
-		_snakeTail.tailX[i] = prevX;
-		_snakeTail.tailY[i] = prevY;
-		prevX = _prevX;
-		prevY = _prevY;
+	else {
+		//otherwise uses the previous food position to keep it consistent
+		foodCoords.push_back(foodX);
+		foodCoords.push_back(foodY);
 	}
+	return foodCoords;
 }
 
 int Logic::inputHandler() {
@@ -99,15 +91,26 @@ int Logic::inputHandler() {
 	return direction;
 }
 
+int Logic::speedHandler() {
+	//initial speed is set as the lowest possible
+	//when the tail length exceeds the given value the lowest speed value will be returned
+	int speed = 200;
+	if (tailLength < 15) {
+		speed = 500 - (tailLength * 20);
+	}
+	return speed;
+}
+
 void Logic::seedRandom() {
+	//Seeds the RNG based on the time
 	srand(time(NULL));
 }
 
 std::vector<int> Logic::getRandomCoords() {
 	//Creates a vector to store the new food coordinates, then acquires a random value to store
 	std::vector<int> coords;
-	int xCoord = (std::rand() % width) - 1;
-	int yCoord = (std::rand() % height) - 1;
+	int xCoord = std::rand() % width;
+	int yCoord = std::rand() % height;
 	//Random coordinates are then added to the vector
 	coords.push_back(xCoord);
 	coords.push_back(yCoord);
