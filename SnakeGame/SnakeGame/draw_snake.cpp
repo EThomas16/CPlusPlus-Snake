@@ -55,7 +55,7 @@ int Draw::drawBoard(int snakeX, int snakeY, int foodX, int foodY, int tailX[100]
 }
 
 int Draw::drawTail(int snakeX, int snakeY, int i, int j, int tailX[100], int tailY[100], int tailLength) {
-	//uandles the drawing of the tail
+	//handles the drawing of the tail
 	int gameOver = 0;
 	//used to make sure the board draws properly
 	bool tailPresent = false;
